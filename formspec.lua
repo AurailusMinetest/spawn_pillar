@@ -1,7 +1,7 @@
 spawn_pillar.formname = "pillar_gui"
 
 function spawn_pillar.make_formspec(player, pos)
-	local active_pillar = minetest.deserialize(player:get_attribute("spawn_pillar"))
+	local active_pillar = spawn_pillar.get_player_pillar(player)
 
 	local fs = "size[10.3,11.3]" ..
 	"label[0.5,-0.25;Select a spawn pillar to tune to.]" ..
@@ -17,10 +17,10 @@ function spawn_pillar.make_formspec(player, pos)
 				fs = fs .. "\nlabel[-0.04," .. (i/1.5 + 0.4) .. ";" .. i .. "]"
 			end
 			local string = " "
-			if active_pillar.x == j and active_pillar.y == i then
+			if active_pillar.x == j and active_pillar.z == i then
 				string = "\\[X\\]"
 			end
-			fs = fs .. "\nbutton[" .. (j/1.6 - 0.3) .. "," .. (i/1.5 + 0.4) .. ";0.8,0.5;x = " .. j .. ", y = " .. i .. ";" .. string .. "]"
+			fs = fs .. "\nbutton[" .. (j/1.6 - 0.3) .. "," .. (i/1.5 + 0.4) .. ";0.8,0.5;x = " .. j .. ", z = " .. i .. ";" .. string .. "]"
 		end
 	end
 	return fs
